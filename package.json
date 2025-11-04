@@ -1,0 +1,9 @@
+{
+  "name": "iris_ai",
+  "version": "1.0.0",
+  "description": "Локальный интерактив с анализом подписи",
+  "private": true,
+  "scripts": {
+    "start": "node server.js"
+  }
+}
