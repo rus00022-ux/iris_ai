@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Панель администратора интерактива 'Анализ подписи'" />
+  <title>Админ • Анализ подписи</title>
+
+  <!-- Шрифт и стиль -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Путь к стилям (на уровень выше, в папку css) -->
+  <link rel="stylesheet" href="../css/style.css" />
+
+  <!-- Фавикон (опционально, можно добавить в корень проекта /favicon.ico) -->
+  <link rel="icon" href="../favicon.ico" type="image/x-icon" />
+</head>
+<body class="admin">
+
+
+  <h1>Настройки интерактива</h1>
+
+  <!-- 🎞️ Экран 1 — Заставка -->
+  <details open>
+    <summary>🎞️ Экран 1 — Заставка</summary>
+    <div class="grid">
+      <label>Ориентация:
+        <span class="inline">
+          <input type="radio" name="orientation" value="16:9"> 16:9
+          <input type="radio" name="orientation" value="9:16" checked> 9:16 (осн.)
+        </span>
+      </label>
+
+      <label>Крупный текст:
+        <input type="text" id="startTitle" value="Нажми на экран">
+      </label>
+
+      <label>Мелкий текст:
+        <input type="text" id="startSubtitle" value="Чтобы расшифровать свою подпись">
+      </label>
+
+      <label>Тип заставки:
+        <select id="splashType">
+          <option value="none" selected>Без медиа</option>
+          <option value="image">Фото</option>
+          <option value="video">Видео</option>
+        </select>
+      </label>
+
+      <label>Выбери файл заставки:
+        <input type="file" id="splashFile" accept="image/*,video/*">
+      </label>
+    </div>
+  </details>
+
+  <!-- ✍️ Экран 2 — Подпись -->
+  <details>
+    <summary>✍️ Экран 2 — Подпись</summary>
+    <div class="grid">
+      <label>Текст сверху:
+        <input type="text" id="signInstruction" value="Распишитесь в квадрате ниже">
+      </label>
+
+      <label>Цвет рамки:
+        <input type="color" id="squareColor" value="#cccccc">
+      </label>
+
+      <label>Цвет фона подписи:
+        <input type="color" id="squareBgColor" value="#ffffff">
+      </label>
+
+      <label>Радиус углов (px):
+        <input type="number" id="squareRadius" value="25" min="0" max="80">
+      </label>
+
+      <label>Ширина поля (%):
+        <input type="number" id="squareWidth" value="80" min="40" max="100">
+      </label>
+
+      <label>Высота поля (%):
+        <input type="number" id="squareHeight" value="60" min="30" max="90">
+      </label>
+
+      <label>Кнопка «В начало»:
+        <input type="text" id="btnStart" value="В начало">
+      </label>
+
+      <label>Кнопка «Стереть»:
+        <input type="text" id="btnClear" value="Стереть">
+      </label>
+
+      <label>Кнопка «Анализировать»:
+        <input type="text" id="btnAnalyze" value="Анализировать">
+      </label>
+    </div>
+  </details>
+
+  <!-- 🔮 Экран 3 — Анализ -->
+  <details>
+    <summary>🔮 Экран 3 — Анализ</summary>
+    <div class="grid">
+      <label>Надпись при анализе:
+        <input type="text" id="analyzingText" value="Анализирую вашу подпись...">
+      </label>
+
+      <label>Длительность анализа (сек):
+        <input type="number" id="analyzeDuration" value="3" min="1" max="20">
+      </label>
+
+      <label>Тип заставки при анализе:
+        <select id="analyzeSplashType">
+          <option value="none" selected>Без медиа</option>
+          <option value="image">Фото</option>
+          <option value="video">Видео</option>
+        </select>
+      </label>
+
+      <label>Файл заставки при анализе:
+        <input type="file" id="analyzeSplashFile" accept="image/*,video/*">
+      </label>
+    </div>
+  </details>
+
+  <!-- 📄 Экран 4 — Результат -->
+  <details>
+    <summary>📄 Экран 4 — Результат</summary>
+    <div class="grid">
+      <label>Кнопка «Напечатать»:
+        <input type="text" id="btnPrint" value="Напечатать">
+      </label>
+    </div>
+  </details>
+
+  <!-- 🎨 Цвета -->
+  <details open>
+    <summary>🎨 Цвета интерфейса</summary>
+    <div class="grid">
+      <label>Цвет темы (фон):
+        <input type="color" id="themeColor" value="#0f172a">
+      </label>
+      <label>Цвет кнопок:
+        <input type="color" id="mainColor" value="#2563eb">
+      </label>
+      <label>Цвет текста:
+        <input type="color" id="textColor" value="#ffffff">
+      </label>
+    </div>
+  </details>
+
+  <!-- 🧠 Режим -->
+  <details>
+    <summary>🧠 Режим работы</summary>
+    <div class="grid">
+      <label>Режим:
+        <select id="mode">
+          <option value="mock" selected>Имитация (офлайн)</option>
+          <option value="gpt">ChatGPT (онлайн)</option>
+        </select>
+      </label>
+
+  <details>
+    <summary>📱 Подключение iPad</summary>
+    <div class="grid">
+      <label>
+        IP-адрес:
+        <input type="text" id="local-ip" readonly>
+      </label>
+
+      <label>
+        Ссылка для iPad:
+        <input type="text" id="ipad-link" readonly>
+      </label>
+
+      <button id="copy-link">📋 Скопировать ссылку</button>
+      <small>Откройте эту ссылку на iPad в Safari или добавьте на экран «Домой».</small>
+    </div>
+  </details>
+
+      <label>Модель:
+        <input type="text" id="model" value="gpt-4o-mini">
+      </label>
+
+      <label>API-ключ OpenAI:
+        <div style="display:flex;align-items:center;gap:6px;">
+          <input type="password" id="apiKey" placeholder="sk-...">
+          <button type="button" id="toggleKey" style="padding:6px 10px;">👁</button>
+        </div>
+      </label>
+    </div>
+  </details>
+
+  <div class="buttons">
+    <button id="save">💾 Сохранить</button>
+    <button id="start">🚀 Запустить интерактив</button>
+  </div>
+
+  <script src="../js/admin.js"></script>
+</body>
+</html>

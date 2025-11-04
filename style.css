@@ -1,0 +1,331 @@
+/* === ОБЩИЕ СТИЛИ === */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Poppins", "Montserrat", Arial, sans-serif;
+  background-color: var(--theme-color, #0f172a);
+  color: var(--text-color, #ffffff);
+  overflow: hidden;
+}
+
+:root {
+  --square-bg: #ffffff;
+}
+
+/* === ЭКРАНЫ === */
+.screen {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  flex-direction: column;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+.screen.active {
+  display: flex;
+  opacity: 1;
+}
+
+/* === ЗАСТАВКА === */
+.splash {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+.splash-media {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: none;
+}
+.splash-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.4);
+}
+#start-text {
+  font-size: 56px;
+  color: var(--text-color, #fff);
+  margin-bottom: 10px;
+  text-align: center;
+}
+#start-subtext {
+  font-size: 22px;
+  opacity: 0.9;
+  color: var(--text-color, #fff);
+}
+
+/* === ЭКРАН 2 — ПОДПИСЬ === */
+.headline {
+  font-size: 24px;
+  margin-bottom: 16px;
+  color: var(--text-color, #fff);
+  text-align: center;
+}
+.signature-box {
+  position: relative;
+  width: min(90vw, 1000px);
+  height: min(60vh, 600px);
+  border: 3px solid var(--square-color, #cccccc);
+  border-radius: var(--square-radius, 20px);
+  background: var(--square-bg, #ffffff);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.signature-box canvas {
+  width: 100%;
+  height: 100%;
+  cursor: crosshair;
+  touch-action: none;
+  pointer-events: auto;
+}
+
+/* === КНОПКИ === */
+.buttons {
+  margin-top: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+button {
+  padding: 12px 26px;
+  font-size: 18px;
+  border: none;
+  border-radius: 14px;
+  background: var(--main-color, #2563eb);
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+button:hover {
+  transform: scale(1.05);
+  background: #1e40af;
+}
+
+/* === АНАЛИЗ === */
+.analyze-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+.analyze-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.4);
+}
+.analyze-overlay h2 {
+  color: #fff;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.loader.orbit {
+  position: relative;
+  width: 90px;
+  height: 90px;
+}
+.loader.orbit div {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  margin: -10px;
+  border-radius: 50%;
+  background: var(--main-color, #2563eb);
+  animation: orbit 1.2s linear infinite;
+}
+.loader.orbit div:nth-child(2) { animation-delay: 0.2s; }
+.loader.orbit div:nth-child(3) { animation-delay: 0.4s; }
+@keyframes orbit {
+  0% { transform: rotate(0deg) translateX(35px) rotate(0deg); }
+  100% { transform: rotate(360deg) translateX(35px) rotate(-360deg); }
+}
+
+/* === ЭКРАН 4 — РЕЗУЛЬТАТ === */
+.result-card {
+  width: min(90vw, 650px);
+  aspect-ratio: 2 / 3;
+  background: #fff;
+  color: #111;
+  border-radius: 20px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 16px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+  animation: fadeInCard 0.6s ease;
+}
+
+@keyframes fadeInCard {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+#result-title {
+  font-size: 26px;
+  color: var(--main-color, #2563eb);
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.signature-preview {
+  position: relative;
+  width: 90%;
+  height: auto;
+  aspect-ratio: 4 / 2.5;
+  border: 3px solid var(--square-color, #ccc);
+  border-radius: 20px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--square-bg, #ffffff);
+}
+
+#saved-signature {
+  width: 100%;
+  height: 100%;
+}
+
+#text-container {
+  width: 90%;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.typing-text {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.typing-text li {
+  font-size: 18px;
+  color: #111;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeInLine 0.6s forwards;
+}
+
+@keyframes fadeInLine {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* === ПЕЧАТЬ === */
+@media print {
+  body { background: #fff; color: #111; overflow: visible; }
+  .screen { display: none; }
+  #result-screen { display: flex; }
+  .result-card {
+    width: 100mm;
+    height: 150mm;
+    box-shadow: none;
+    border: 1px solid #ccc;
+  }
+  .buttons { display: none; }
+}
+
+/* === АДМИНКА === */
+body.admin {
+  overflow-y: auto;
+  padding: 20px 24px;
+  background: #f8fafc;
+  color: #111;
+  font-size: 15px;
+}
+body.admin h1 {
+  text-align: center;
+  color: var(--main-color, #2563eb);
+  margin-bottom: 20px;
+}
+details {
+  background: #fff;
+  border-radius: 14px;
+  margin-bottom: 14px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+}
+summary {
+  cursor: pointer;
+  padding: 14px 16px;
+  font-weight: 600;
+  color: var(--main-color, #2563eb);
+  background: #f1f5f9;
+  border-bottom: 1px solid #e2e8f0;
+}
+details > .grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 12px;
+  padding: 16px;
+}
+label {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  gap: 6px;
+}
+.inline {
+  display: inline-flex;
+  gap: 10px;
+  align-items: center;
+}
+input[type="text"],
+input[type="number"],
+input[type="password"],
+input[type="color"],
+select,
+input[type="file"] {
+  padding: 8px 10px;
+  font-size: 14px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background: #fff;
+}
+.buttons {
+  text-align: center;
+  margin-top: 16px;
+}
+#save, #start {
+  background: var(--main-color, #2563eb);
+}
+#toggleKey {
+  font-size: 16px;
+  line-height: 1;
+  background: #e2e8f0;
+  color: #111;
+  padding: 5px 10px;
+  border-radius: 6px;
+  border: 1px solid #cbd5e1;
+  cursor: pointer;
+}
+#toggleKey:hover {
+  background: #cbd5e1;
+}

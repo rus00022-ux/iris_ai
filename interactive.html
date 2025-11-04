@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Интерактив 'Анализ подписи' — подпишись и узнай о себе больше" />
+  <title>Анализ подписи</title>
+
+  <!-- Шрифт и стили -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="icon" href="../favicon.ico" type="image/x-icon" />
+</head>
+<body>
+
+  <!-- === ЭКРАН 1 — ЗАСТАВКА === -->
+  <div id="start-screen" class="screen active">
+    <div class="splash">
+      <video id="bg-video" class="splash-media" autoplay muted loop playsinline></video>
+      <img id="bg-image" class="splash-media" alt="">
+      <div class="splash-overlay">
+        <h1 id="start-text">Нажми на экран</h1>
+        <h3 id="start-subtext">Чтобы расшифровать свою подпись</h3>
+      </div>
+    </div>
+  </div>
+
+  <!-- === ЭКРАН 2 — ПОДПИСЬ === -->
+  <div id="signature-screen" class="screen">
+    <div id="sign-instruction" class="headline">Распишитесь в квадрате ниже</div>
+    <div id="signatureBox" class="signature-box">
+      <canvas id="signature-pad"></canvas>
+    </div>
+    <div class="buttons">
+      <button id="back">В начало</button>
+      <button id="reset">Стереть</button>
+      <button id="analyze">Анализировать</button>
+    </div>
+  </div>
+
+  <!-- === ЭКРАН 3 — АНАЛИЗ === -->
+  <div id="analyzing-screen" class="screen">
+    <div class="analyze-wrapper">
+      <video id="analyze-video" class="splash-media" autoplay muted loop playsinline></video>
+      <img id="analyze-image" class="splash-media" alt="">
+      <div class="analyze-overlay">
+        <h2 id="analyzing-text">Анализирую вашу подпись...</h2>
+        <div class="loader orbit">
+          <div></div><div></div><div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- === ОКНО 4 — РЕЗУЛЬТАТ === -->
+  <div id="result-screen" class="screen">
+    <div class="result-card">
+      <h2 id="result-title">Результат анализа</h2>
+
+      <div class="signature-preview">
+        <canvas id="saved-signature"></canvas>
+      </div>
+
+      <div id="text-container">
+        <ul id="bullets" class="typing-text"></ul>
+      </div>
+
+      <div class="buttons">
+        <button id="restart">В начало</button>
+        <button id="print">Напечатать</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ПОДКЛЮЧАЕМ ЛОГИКУ -->
+  <script src="../js/main.js"></script>
+</body>
+</html>
