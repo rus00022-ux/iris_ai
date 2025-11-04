@@ -118,7 +118,7 @@ function detectLocalIP() {
           found = true;
           ipField.value = ip;
           ipField.readOnly = true;
-          linkField.value = `http://${ip}:8000/html/interactive.html`;
+          linkField.value = `http://${ip}:8000/interactive.html`;
           pc.close();
         }
       }
@@ -134,7 +134,7 @@ function detectLocalIP() {
       ipField.placeholder = "Введите IP вручную (пример: 192.168.68.101)";
       linkField.placeholder = "Ссылка появится автоматически";
       ipField.addEventListener("input", () => {
-        linkField.value = `http://${ipField.value}:8000/html/interactive.html`;
+        linkField.value = `http://${ipField.value}:8000/interactive.html`;
       });
     }
   }, 3000);

@@ -59,10 +59,29 @@ window.addEventListener("DOMContentLoaded", () => {
   }
 
   // === Переходы ===
+  function resizeSavedCanvas() {
+    const preview = document.querySelector(".signature-preview");
+    if (!preview) return;
+
+    const rect = preview.getBoundingClientRect();
+    if (!rect.width || !rect.height) return;
+
+    const dpr = window.devicePixelRatio || 1;
+    savedCanvas.style.width = rect.width + "px";
+    savedCanvas.style.height = rect.height + "px";
+    savedCanvas.width = rect.width * dpr;
+    savedCanvas.height = rect.height * dpr;
+
+    savedCtx.setTransform(1, 0, 0, 1, 0, 0);
+    savedCtx.fillStyle = s.squareBgColor || "#ffffff";
+    savedCtx.fillRect(0, 0, savedCanvas.width, savedCanvas.height);
+  }
+
   function showScreen(target) {
     Object.values(screens).forEach(x => x.classList.remove("active"));
     target.classList.add("active");
     if (target === screens.signature) setTimeout(fitCanvas, 50);
+    if (target === screens.result) setTimeout(resizeSavedCanvas, 50);
   }
 
   screens.start.addEventListener("click", () => showScreen(screens.signature));
@@ -87,7 +106,10 @@ window.addEventListener("DOMContentLoaded", () => {
     ctx.fillRect(0, 0, rect.width, rect.height);
   }
 
-  window.addEventListener("resize", fitCanvas);
+  window.addEventListener("resize", () => {
+    fitCanvas();
+    resizeSavedCanvas();
+  });
   window.addEventListener("load", fitCanvas);
   fitCanvas();
   setTimeout(fitCanvas, 150);
@@ -241,7 +263,16 @@ window.addEventListener("DOMContentLoaded", () => {
     }
 
     showScreen(screens.result);
-    await drawColoredSignature(dataURL, savedCtx, savedCanvas.width, savedCanvas.height, s.mainColor || "#2563eb");
+    resizeSavedCanvas();
+    await wait(60);
+    await drawColoredSignature(
+      dataURL,
+      savedCtx,
+      savedCanvas.width,
+      savedCanvas.height,
+      s.mainColor || "#2563eb",
+      s.squareBgColor || "#ffffff"
+    );
 
     // === АНИМАЦИЯ ПИШУЩЕГО ТЕКСТА ===
     bullets.innerHTML = "";
@@ -292,7 +323,7 @@ window.addEventListener("DOMContentLoaded", () => {
     return out;
   }
 
-  function drawColoredSignature(dataURL, ctx, w, h, color) {
+  function drawColoredSignature(dataURL, ctx, w, h, color, background) {
     return new Promise(resolve => {
       const img = new Image();
       img.onload = () => {
@@ -302,6 +333,12 @@ window.addEventListener("DOMContentLoaded", () => {
         ctx.fillStyle = color;
         ctx.fillRect(0, 0, w, h);
         ctx.globalCompositeOperation = "source-over";
+        if (background) {
+          ctx.globalCompositeOperation = "destination-over";
+          ctx.fillStyle = background;
+          ctx.fillRect(0, 0, w, h);
+          ctx.globalCompositeOperation = "source-over";
+        }
         resolve();
       };
       img.src = dataURL;
